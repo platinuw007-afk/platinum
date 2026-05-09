@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoasgn.Naw_💸 Bio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0b0b;
+            /* Lớp ảnh phong cảnh làm nền */
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.ibb.co/3mkMpM78/landscape.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ff79c6;
+            box-shadow: 0 0 25px #ff79c6;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+            text-shadow: 0 0 15px #ff79c6;
+        }
+        .btn-link {
+            display: block;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 15px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 121, 198, 0.3);
+            transition: 0.3s;
+        }
+        .btn-link:hover {
+            background: #ff79c6;
+            box-shadow: 0 0 20px #ff79c6;
+        }
+        .counter-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .stat-item { display: flex; flex-direction: column; align-items: center; }
+        .like-btn { background: none; border: none; cursor: pointer; font-size: 1.5rem; transition: 0.2s; }
+        .stat-num { font-size: 1.2rem; font-weight: bold; margin-top: 5px; }
+        .stat-label { font-size: 0.7rem; color: #aaa; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.ibb.co/m5g3nMbJ/avatar.jpg" alt="Avatar" class="avatar">
+        
+        <h1>Hoasgn.Naw_💸</h1>
+
+        <div class="links">
+            <a href="https://www.facebook.com/share/1CgFkW5sZq/" class="btn-link">Facebook Cá Nhân</a>
+            <a href="https://m.me/j/AbaN07D8wQV4sLNQ/" class="btn-link">Box Messenger</a>
+            <a href="https://zalo.me/g/1wul5eozuk2bmdsgk5a0" class="btn-link">Nhóm Zalo</a>
+            <a href="https://discord.gg/4gsmDeAe4" class="btn-link">Discord Server</a>
+        </div>
+
+        <div class="counter-section">
+            <div class="stat-item">
+                <button class="like-btn" id="likeBtn">❤️</button>
+                <span class="stat-num" id="likeCount">0</span>
+                <span class="stat-label">Lượt thích</span>
+            </div>
+            <div class="stat-item">
+                <span style="font-size: 1.5rem;">👁️</span>
+                <span class="stat-num" id="viewCount">0</span>
+                <span class="stat-label">Lượt xem</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Khởi tạo bộ đếm từ LocalStorage (Lưu trên máy người dùng)
+        let likes = parseInt(localStorage.getItem('bio_likes')) || 0;
+        let views = parseInt(localStorage.getItem('bio_views')) || 0;
+
+        // Tăng lượt xem mỗi khi load trang
+        views++;
+        localStorage.setItem('bio_views', views);
+        document.getElementById('viewCount').innerText = views.toLocaleString();
+        document.getElementById('likeCount').innerText = likes.toLocaleString();
+
+        // Xử lý nút like
+        document.getElementById('likeBtn').addEventListener('click', function() {
+            likes++;
+            localStorage.setItem('bio_likes', likes);
+            document.getElementById('likeCount').innerText = likes.toLocaleString();
+            this.style.transform = "scale(1.3)";
+            setTimeout(() => this.style.transform = "scale(1)", 200);
+        });
+    </script>
+</body>
+</html>
