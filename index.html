@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoasgn.Naw_💸 | Premium White</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --main-white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Lớp nền phong cảnh hiển thị rõ nét */
+        .bg-landscape {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('https://i.ibb.co/3mkMpM78/landscape.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+        }
+
+        /* Lớp phủ tối nhẹ để nổi bật nội dung trắng */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -2;
+        }
+
+        #snow-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .profile-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid var(--main-white); /* Viền màu trắng */
+            border-radius: 20px;
+            padding: 35px 25px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+            animation: slideUp 1s ease-out;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--main-white);
+            box-shadow: 0 0 15px var(--main-white);
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: var(--main-white);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+        }
+
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--main-white);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .link-card:hover {
+            background: var(--main-white);
+            color: #000;
+            box-shadow: 0 0 20px var(--main-white);
+            transform: scale(1.05);
+        }
+
+        /* Hiệu ứng tia chớp khi ấn vào màn hình */
+        .click-effect {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px white;
+            animation: expand 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes expand {
+            to { transform: scale(30); opacity: 0; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body onclick="spawnEffect(event)">
+
+    <div class="bg-landscape"></div>
+    <div class="overlay"></div>
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="container">
+        <div class="profile-card">
+            <!-- Ảnh chân dung của bạn -->
+            <img src="https://i.ibb.co/m5g3nMbJ/avatar.jpg" alt="Lê Hoàng Nam" class="avatar">
+            
+            <h1>Lê Hoàng Nam</h1>
+
+            <div class="links-group">
+                <a href="https://www.facebook.com/share/1CgFkW5sZq/" class="link-card">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
+                <a href="https://m.me/j/AbaN07D8wQV4sLNQ/" class="link-card">
+                    <i class="fab fa-facebook-messenger"></i> Messenger
+                </a>
+                <a href="https://zalo.me/g/1wul5eozuk2bmdsgk5a0" class="link-card">
+                    <i class="fas fa-users"></i> Nhóm Zalo
+                </a>
+                <a href="https://discord.gg/4gsmDeAe4" class="link-card">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hiệu ứng Tuyết rơi dày và rõ hơn
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let snowParticles = [];
+
+        function initSnow() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            for(let i=0; i<150; i++) {
+                snowParticles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 3 + 1,
+                    d: Math.random() * 1
+                });
+            }
+        }
+
+        function drawSnow() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            for(let i=0; i<snowParticles.length; i++) {
+                let p = snowParticles[i];
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
+            }
+            ctx.fill();
+            updateSnow();
+        }
+
+        function updateSnow() {
+            for(let i=0; i<snowParticles.length; i++) {
+                let p = snowParticles[i];
+                p.y += Math.cos(p.d) + 1 + p.r/2;
+                p.x += Math.sin(p.d) * 2;
+                if(p.x > canvas.width+5 || p.x < -5 || p.y > canvas.height) {
+                    snowParticles[i] = {x: Math.random()*canvas.width, y: -10, r: p.r, d: p.d};
+                }
+            }
+        }
+
+        setInterval(drawSnow, 33);
+        window.onload = initSnow;
+
+        // Hiệu ứng bùng nổ trắng khi click
+        function spawnEffect(e) {
+            const effect = document.createElement("div");
+            effect.className = "click-effect";
+            effect.style.left = e.pageX + "px";
+            effect.style.top = e.pageY + "px";
+            document.body.appendChild(effect);
+            setTimeout(() => effect.remove(), 500);
+        }
+    </script>
+</body>
+</html>
