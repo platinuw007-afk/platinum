@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>PayloadDescription</key>
+            <string>Tối ưu hóa kết nối mạng cho Game - Admin: Lê Hoàng Nam</string>
+            <key>PayloadDisplayName</key>
+            <string>Gaming DNS Pro</string>
+            <key>PayloadIdentifier</key>
+            <string>com.lehoangnam.dns.config</string>
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+            <key>PayloadUUID</key>
+            <string>E7C2B1A4-9F0D-4B2E-8A3C-D5F1E2A3B4C5</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>DNSSettings</key>
+            <dict>
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+                <key>ServerAddresses</key>
+                <array>
+                    <string>1.1.1.1</string>
+                    <string>1.0.0.1</string>
+                </array>
+                <key>ServerURL</key>
+                <string>https://cloudflare-dns.com/dns-query</string>
+            </dict>
+        </dict>
+    </array>
+    <key>PayloadDisplayName</key>
+    <string>Le Hoang Nam - Gaming Config v2</string>
+    <key>PayloadIdentifier</key>
+    <string>com.lehoangnam.profile.optimize</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>F8D3C2B5-0E1F-5C3D-9B4E-E6A2F3B4C5D6</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>
